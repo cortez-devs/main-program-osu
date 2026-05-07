@@ -1,0 +1,37 @@
+.landing-container{
+    text-align: center;
+    padding: 40px;
+}
+
+.hero{
+    background: #f8f8f8;
+    padding: 40px;
+    border-radius: 12px;
+}
+
+.buttons{
+    margin: 20px 0;
+}
+
+.btn{
+    padding: 12px 24px;
+    margin: 0 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login {
+    background: #4caf50;
+    color: white;
+}
+
+.register{
+    background: #4fc3f7;
+    color: white;
+}
+
+.tagline{
+    margin-top: 20px;
+    font-size: 1.1rem;
+}

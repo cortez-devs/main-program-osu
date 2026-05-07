@@ -1,0 +1,90 @@
+.dash-container{
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.dash-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dash-title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dash-logo{
+    font-size: 2rem;
+}
+
+.btn-logout{
+    background: #ff5c8a;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-logout:hover{
+    background: #ff3f74;
+}
+
+.dash-welcome{
+    font-size: 1.3rem;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.dash-date{
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.dash-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-view{
+    background: #ff6b4a;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;;
+}
+
+.btn-add{
+    background: #4caf50;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btn-view:hover{
+    background: #ff5a33;
+}
+
+.btn-add:hover{
+    background: #43a047;
+}
+
+.dash-tip{
+    background: #333;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
