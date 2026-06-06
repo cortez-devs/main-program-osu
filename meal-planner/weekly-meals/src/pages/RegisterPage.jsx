@@ -1,10 +1,12 @@
 import { useState } from 'react';
-/*import { registerUser } from "../services/AuthService";*/
+import { registerUser } from "../services/api/authService";
+import { createUserProfile } from '../services/api/userProfileService';
 import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 
 export default function RegisterPage() {
     const navigate = useNavigate();
+    
     const [registered, setRegistered] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -13,26 +15,45 @@ export default function RegisterPage() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setError("");
 
-        setRegistered(true);
+        try {
+            // ✅ Register user (auth microservice expects ONLY email + password)
+            const authRes = await registerUser(email, password);
 
-        setTimeout(() => {
-            navigate("/dashboard");
-        }, 2500);
-        //setError("");
-
-       /* try {
-            const res = await registerUser(name, email, password);
-            if (res.error) {
-                setError(res.error);
+            if (authRes.error) {
+                setError(authRes.error);
                 return;
             }
 
-            navigate("/login");
+            // ✅ Extract returned values
+            const userId = authRes.userId;
+            const authEmail = authRes.email;
+
+            // ❗ If these are undefined, profile creation will fail
+            if (!userId || !authEmail) {
+                setError("Registration failed: missing userId or email from auth service.");
+                return;
+            }
+
+            const profileRes = await createUserProfile(userId, name, authEmail);
+
+            if (profileRes.error) {
+                setError(profileRes.error);
+                return;
+            }
+
+            localStorage.setItem("user", JSON.stringify({ userId, email: authEmail }));
+
+            setRegistered(true);
+
+            setTimeout(() => {
+                navigate("/dashboard");
+            }, 1500);
 
         } catch (err) {
             setError("Registration failed. Please try again.");
-        }*/
+        }
     }
 
     return (
@@ -67,19 +88,17 @@ export default function RegisterPage() {
                     required
                 />
 
+                {error && <p className="error-message">{error}</p>}
                 {registered && (
                     <p className="success-message">✔ You have been registered!</p>
                 )}
 
-                <button className="btn-register">
-                    Register
-                </button>
+                <button className="btn-register">Register</button>
             </form>
 
-            <p className='register-link'>
+            <p className='login-link'>
                 Already have an account? <a href="/login">Login here</a>
             </p>
         </div>
-
     );
 }

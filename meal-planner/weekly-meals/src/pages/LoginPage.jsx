@@ -1,5 +1,6 @@
-import {useState} from 'react';
-import {loginUser} from '../services/AuthService';
+import { useState } from 'react';
+import { loginUser } from '../services/api/authService';
+import { getUserProfile, createUserProfile } from '../services/api/userProfileService';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
@@ -13,27 +14,33 @@ export default function LoginPage() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setError("");
 
-        setLoggedIn(true);
-        setTimeout(() => {
-            navigate("/dashboard");
-        }, 1500);
-        // setError("");
+        try {
+            const res = await loginUser(email, password);
+            if (res.error) {
+                setError(res.error);
+                return
+            }
 
-        // try {
-        //     const res = await loginUser(email, password);
+            const userId = res.userId
 
-        //     if (res.error){
-        //         setError(res.error);
-        //         return;
-        //     }
+            const profile = await getUserProfile(userId);
+            if (!profile || profile.error) {
+                await createUserProfile(userId, "New User", email);
+            }
 
-        //     localStorage.setItem("token", res.token);
+            localStorage.setItem("user", JSON.stringify({userId, email}));
+            
+            setLoggedIn(true);
 
-        //     navigate("/planner");
-        // } catch (err) {
-        //     setError("Login failed. Please try again.");
-        // }
+            setTimeout(() => {
+                navigate("/dashboard");
+            }, 1500);
+
+        } catch (err) {
+            setError("An error occurred. Please try again.");
+        }
     }
 
     return (
@@ -58,10 +65,8 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-
-                {loggedIn && (
-                    <p className="success-message">✔ You have been logged in!</p>
-                )}
+                {error && <p className="error-message">{error}</p>}
+                {loggedIn && <p className="success-message">✔ You have been logged in!</p>}
 
                 <button className="btn-login">Login</button>
             </form>

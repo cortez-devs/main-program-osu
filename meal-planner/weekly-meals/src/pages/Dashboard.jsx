@@ -20,21 +20,19 @@ export default function Dashboard() {
                     <span className="dash-logo">🍽️</span>
                     <h1>Family Meal Planner</h1>
                 </div>
-
-                <button className="btn-logout" onClick={handleLogout}>LOGOUT</button>
+                <div className="dash-header-buttons">
+                    <Link to="/profile" className="btn-profile">PROFILE</Link>
+                    <button className="btn-logout" onClick={handleLogout}>LOGOUT</button>
+                </div>
             </div>
 
             <p className="dash-welcome">Welcome back!</p>
             <p className="dash-date">{today}</p>
 
             <div className="dash-buttons">
-                <Link to="/meals" className="btn-view">
-                MEAL LIST
-                </Link>
+                <Link to="/meals" className="btn-view">MEAL LIST</Link>
 
-                <Link to="/add-meal" className="btn-add">
-                ADD MEAL
-                </Link>
+                <Link to="/add-meal" className="btn-add">ADD MEAL</Link>
             </div>
             <div className="dash-tip">
                 Tip: Add your first meal. Lets start planning your week!
