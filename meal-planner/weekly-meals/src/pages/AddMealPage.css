@@ -1,14 +1,27 @@
-.addmeal-container {
-  max-width: 5%;
-  margin: 50px auto;
-  padding: 20px;
+.addmeal-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.addmeal-card {
+  width: 420px;
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  color: white;
+}
+
+.title {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .top-buttons {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .btn-back {
@@ -39,33 +52,33 @@
   background: #ff3f74;
 }
 
-/* Dark rounded box behind the input */
-.input-box {
-  background: #222;
-  padding: 25px;
-  border-radius: 12px;
-  color: white;
-  margin-top: 20px;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.input-box label {
-  display: block;
-  text-align: left;
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-  font-weight: 500;
+.form label {
+  font-weight: 600;
+  margin-bottom: -5px;
 }
 
-.input-box input {
+.form input,
+.form textarea {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
   border: none;
   font-size: 1rem;
-  margin-bottom: 20px;
+}
+
+textarea {
+  height: 80px;
+  resize: none;
 }
 
 .btn-save {
+  margin-top: 10px;
   width: 100%;
   background: #4caf50;
   color: white;
@@ -81,9 +94,40 @@
   background: #43a047;
 }
 
-.saved-msg {
+.success {
   margin-top: 20px;
   color: #4caf50;
   font-weight: bold;
-  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Hide the real file input */
+.form input[type="file"] {
+  display: none;
+}
+
+/* Custom file button */
+.file-label {
+  display: inline-block;
+  background: #2bb3b1;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.file-label:hover {
+  background: #1f8f8d;
+}
+
+/* Show selected file name */
+.file-name {
+  margin-top: -10px;
+  margin-bottom: 20px;
+  color: #ccc;
+  font-size: 0.9rem;
+  text-align: left;
 }

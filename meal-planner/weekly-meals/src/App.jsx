@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import MealsPage from "./pages/MealsPage";
 import AddMealPage from "./pages/AddMealPage";
 import ProfilePage from "./pages/ProfilePage";
+import MealView from "./pages/MealView";
 
 function ProtectedRoute({ children }) {
     const storedUser = localStorage.getItem("user");
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/meals" element={<MealsPage />} />
         <Route path="/add-meal" element={<AddMealPage />} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/meal/:mealId" element={<MealView />} />
       </Routes>
     </BrowserRouter>
   );

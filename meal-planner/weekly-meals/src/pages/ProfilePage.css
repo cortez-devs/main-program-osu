@@ -64,3 +64,44 @@
 .btn-delete:hover {
     background-color: #c0392b;
 }
+
+.profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+}
+
+.profile-avatar-container {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;      
+    gap: 12px;                
+    margin-bottom: 1rem;
+}
+
+.profile-avatar:hover {
+    opacity: 0.9;
+    transition: 0.2s ease;
+}
+
+.hidden-file-input {
+    display: none;            
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #4f46e5;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.upload-btn:hover {
+    background-color: #4338ca;
+}

@@ -1,19 +1,31 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getMeals } from "../services/api/mealService"
 import './MealsPage.css';
 
 export default function MealsPage() {
     const navigate = useNavigate();
-    const [search, setSearch] = useState("");
 
-    const meals = [
-        "Spaghetti Bolognese",
-        "Chicken Stir Fry",
-        "Vegetable Curry",
-    ];
+    const [search, setSearch] = useState("");
+    const [meals, setMeals] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() =>{
+        async function loadMeals() {
+            try {
+                const data =await getMeals();
+                setMeals(data);
+            } catch (err) {
+                console.error("Failed to load Meals", err);
+            }
+            setLoading(false);
+        }
+
+        loadMeals();
+    }, []);
 
     const filteredMeals = meals.filter((meal) =>
-        meal.toLowerCase().includes(search.toLowerCase())
+        meal.name.toLowerCase().includes(search.toLowerCase())
     );
 
     function handleLogout() {
@@ -47,11 +59,22 @@ export default function MealsPage() {
             <h2 className="meal-subtitle">MEALS</h2>
 
             <div className="meal-list">
-                {filteredMeals.map((meal, index) => (
-                    <div key={index} className="meal-card">
-                        {meal}
-                    </div>
-                ))}
+                {loading && <p>Loading meals...</p>}
+
+                {!loading && filteredMeals.length === 0 && (
+                    <p className='empty-message'>No meals found</p>
+                )}
+
+                {!loading &&
+                    filteredMeals.map((meal) => (
+                        <div 
+                        key={meal.mealId} 
+                        className="meal-card"
+                        onClick={() => navigate(`/meal/${meal.mealId}`)}
+                        >
+                            {meal.name}
+                        </div>
+                    ))}
 
             </div>
 
